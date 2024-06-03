@@ -16,6 +16,12 @@ public class AttachIterative implements AttachStrategy {
         while (currentWagon.next != null) {
             currentWagon = currentWagon.next;
         }
-        currentWagon.next = wagon;
+
+        if (currentWagon != wagon) {
+            currentWagon.next = wagon;
+        } else {
+            throw new IllegalArgumentException("You cannot attach wagon to itself");
+        }
     }
+}
 }
