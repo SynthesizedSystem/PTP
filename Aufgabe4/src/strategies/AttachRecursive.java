@@ -15,7 +15,12 @@ public class AttachRecursive implements AttachStrategy {
 
     private void recursiveAttach(Wagon currentWagon, Wagon wagon) {
         if (currentWagon.next == null) {
-            currentWagon.next = wagon;
+            // Make sure we are not attaching wagon to itself
+            if (currentWagon != wagon) {
+                currentWagon.next = wagon;
+            } else {
+                throw new IllegalArgumentException("You cannot attach wagon to itself");
+            }
             return;
         }
         recursiveAttach(currentWagon.next, wagon);

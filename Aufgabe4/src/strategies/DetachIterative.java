@@ -11,7 +11,10 @@ public class DetachIterative implements DetachStrategy {
         }
 
         if (train.first.id == wagon.id) {
+            // Detach wagon and make sure detached wagon points again to null reference
+            Wagon detachedWagon = train.first;
             train.first = train.first.next;
+            detachedWagon.next = null;
             return true; // First wagon satisfies condition
         }
 
