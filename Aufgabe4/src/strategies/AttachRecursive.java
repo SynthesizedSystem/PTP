@@ -1,11 +1,11 @@
 package strategies;
 
-import aufgabe4.Train;
-import aufgabe4.Wagon;
+import aufgabe4.Zug;
+import aufgabe4.Wagen;
 
 public class AttachRecursive implements AttachStrategy {
     @Override
-    public void attach(Train train, Wagon wagon) {
+    public void attach(Zug train, Wagen wagon) {
         if (train.first == null) {
             train.first = wagon;
             return;
@@ -13,7 +13,7 @@ public class AttachRecursive implements AttachStrategy {
         recursiveAttach(train.first, wagon);
     }
 
-    private void recursiveAttach(Wagon currentWagon, Wagon wagon) {
+    private void recursiveAttach(Wagen currentWagon, Wagen wagon) {
         if (currentWagon.next == null) {
             // Make sure we are not attaching wagon to itself
             if (currentWagon != wagon) {

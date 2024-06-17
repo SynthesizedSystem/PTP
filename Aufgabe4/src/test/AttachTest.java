@@ -1,7 +1,7 @@
 package test;
 
-import aufgabe4.Train;
-import aufgabe4.Wagon;
+import aufgabe4.Zug;
+import aufgabe4.Wagen;
 import strategies.AttachIterative;
 import strategies.AttachRecursive;
 
@@ -15,31 +15,31 @@ public class AttachTest extends Test {
     }
 
     private static boolean testEmptyTrain() {
-        Train train = new Train();
+        Zug train = new Zug();
         return assertEquals(train, "Train: ", "Failed empty train test!");
     }
 
     private static boolean testIterativeAttachment() {
-        Train train = new Train();
+        Zug train = new Zug();
         train.setAttachStrategy(new AttachIterative());
-        Wagon[] wagons = new Wagon[]{new Wagon(), new Wagon(), new Wagon()};
-        train.attachWagon(wagons[0]);
-        train.attachWagon(wagons[1]);
-        train.attachWagon(wagons[2]);
+        Wagen[] wagons = new Wagen[]{new Wagen(), new Wagen(), new Wagen()};
+        train.anhaengen(wagons[0]);
+        train.anhaengen(wagons[1]);
+        train.anhaengen(wagons[2]);
 
-        Wagon.flushId();
+        Wagen.flushId();
         return assertEquals(train, "Train: 0->1->2->", "Failed iterative attachment test!");
     }
 
     private static boolean testRecursiveAttachment() {
-        Train train = new Train();
+        Zug train = new Zug();
         train.setAttachStrategy(new AttachRecursive());
-        Wagon[] wagons = new Wagon[]{new Wagon(), new Wagon(), new Wagon()};
-        train.attachWagon(wagons[0]);
-        train.attachWagon(wagons[1]);
-        train.attachWagon(wagons[2]);
+        Wagen[] wagons = new Wagen[]{new Wagen(), new Wagen(), new Wagen()};
+        train.anhaengen(wagons[0]);
+        train.anhaengen(wagons[1]);
+        train.anhaengen(wagons[2]);
 
-        Wagon.flushId();
+        Wagen.flushId();
         return assertEquals(train, "Train: 0->1->2->", "Failed recursive attachment test!");
     }
 }

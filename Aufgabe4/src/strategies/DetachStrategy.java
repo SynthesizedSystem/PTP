@@ -1,8 +1,8 @@
 package strategies;
 
-import aufgabe4.Train;
-import aufgabe4.Wagon;
+import aufgabe4.Zug;
+import aufgabe4.Wagen;
 
 public interface DetachStrategy {
-    public boolean detach(Train train, Wagon wagon);
+    public boolean detach(Zug train, Wagen wagon);
 }
