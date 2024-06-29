@@ -1,27 +1,27 @@
 package strategies;
 
-import aufgabe4.Train;
-import aufgabe4.Wagon;
+import aufgabe4.Zug;
+import aufgabe4.Wagen;
 
 public class DetachIterative implements DetachStrategy {
     @Override
-    public boolean detach(Train train, Wagon wagon) {
+    public boolean detach(Zug train, Wagen wagon) {
         if (train.first == null) {
             return false; // Train is empty
         }
 
         if (train.first.id == wagon.id) {
             // Detach wagon and make sure detached wagon points again to null reference
-            Wagon detachedWagon = train.first;
+            Wagen detachedWagon = train.first;
             train.first = train.first.next;
             detachedWagon.next = null;
             return true; // First wagon satisfies condition
         }
 
-        Wagon currentWagon = train.first;
+        Wagen currentWagon = train.first;
         while (currentWagon.next != null) {
             if (currentWagon.next.id == wagon.id) {
-                Wagon detachedWagon = currentWagon.next;
+                Wagen detachedWagon = currentWagon.next;
                 currentWagon.next = currentWagon.next.next;
                 detachedWagon.next = null;
                 return true;

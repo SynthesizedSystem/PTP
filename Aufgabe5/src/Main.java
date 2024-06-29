@@ -33,6 +33,8 @@ public class Main {
         testsResult &= testBinaeresGatterUndFalse();
         testsResult &= testBinaeresGatterOderTrue();
         testsResult &= testBinaeresGatterOderFalse();
+        testsResult &= testBinaeresGatterXorTrue();
+        testsResult &= testBinaeresGatterXorFalse();
 
         testsResult &= testComplexExpression();
 
@@ -107,6 +109,21 @@ public class Main {
         return testString("(FALSCH ODER FALSCH)", oder.toString())
                 && testBoolean(false, oder.getOutput());
     }
+    private static boolean testBinaeresGatterXorTrue() {
+        BinaeresGatter xor = new BinaeresGatterXor();
+        xor.eingaenge[0] = new Eingang(true);
+        xor.eingaenge[1] = new Eingang(false);
+        return testString("(WAHR XOR FALSCH)", xor.toString())
+                && testBoolean(true, xor.getOutput());
+    }
+
+    private static boolean testBinaeresGatterXorFalse() {
+        BinaeresGatter xor = new BinaeresGatterXor();
+        xor.eingaenge[0] = new Eingang(true);
+        xor.eingaenge[1] = new Eingang(true);
+        return testString("(WAHR XOR WAHR)", xor.toString())
+                && testBoolean(false, xor.getOutput());
+    }
 
     private static boolean testComplexExpression() {
         BinaeresGatter und = new BinaeresGatterUnd();
@@ -123,4 +140,5 @@ public class Main {
         return testString("(NICHT ((FALSCH UND WAHR) ODER WAHR))", nicht.toString())
                 && testBoolean(false, nicht.getOutput());
     }
+
 }

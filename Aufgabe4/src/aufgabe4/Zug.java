@@ -5,25 +5,27 @@ import strategies.AttachIterative;
 import strategies.DetachIterative;
 import strategies.DetachStrategy;
 
-public class Train {
-    public Wagon first = null;
+import java.util.ArrayList;
+
+public class Zug {
+    public Wagen first = null;
     // Iterative is default strategy, but could be set to recursive
     private AttachStrategy attachStrategy = new AttachIterative();
     private DetachStrategy detachStrategy = new DetachIterative();
 
-    public Train() {
+    public Zug() {
     }
 
-    public Train(AttachStrategy attachStrategy, DetachStrategy detachStrategy) {
+    public Zug(AttachStrategy attachStrategy, DetachStrategy detachStrategy) {
         this.attachStrategy = attachStrategy;
         this.detachStrategy = detachStrategy;
     }
 
-    public void attachWagon(Wagon wagon) {
+    public void anhaengen(Wagen wagon) {
         attachStrategy.attach(this, wagon);
     }
 
-    public void detachWagon(Wagon wagon) {
+    public void abhaengen(Wagen wagon) {
         detachStrategy.detach(this, wagon);
     }
 
@@ -35,11 +37,25 @@ public class Train {
         detachStrategy = strategy;
     }
 
+    public boolean vergleichen(Zug zug) {
+        Wagen thisTrainWagon = this.first;
+        while (thisTrainWagon != null) {
+            Wagen otherTrainWagon = zug.first;
+            while (otherTrainWagon != null) {
+                if (thisTrainWagon.vergleichen(otherTrainWagon))
+                    return true;
+                otherTrainWagon = otherTrainWagon.next;
+            }
+            thisTrainWagon = thisTrainWagon.next;
+        }
+        return false;
+    }
+
     public String toString() {
         StringBuilder trainString = new StringBuilder();
         trainString.append("Train: ");
 
-        Wagon currentWagon = first;
+        Wagen currentWagon = first;
         while (currentWagon != null) {
             trainString.append(currentWagon.toString());
             currentWagon = currentWagon.next;
